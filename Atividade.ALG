@@ -1,4 +1,4 @@
-Algoritmo ClassificaNumeros
+Algoritmo ClassificaNumerosSemInstrucoes
 
 Var
    numeros : vetor [1..100] de Inteiro
@@ -10,8 +10,10 @@ Var
    contImpares   : Inteiro
    contPrimos    : Inteiro
    contCompostos : Inteiro
-   i, j, numAtual, divisores : Inteiro
+   i, j, numAtual : Inteiro
    ehPrimo : Logico
+   opcaoMenu : Inteiro
+   pausa : Caractere
 
 Inicio
    contPares := 0
@@ -19,12 +21,9 @@ Inicio
    contPrimos := 0
    contCompostos := 0
 
-   Escreval("Digite 100 números inteiros:")
    Para i de 1 ate 100 faca
-      Escreva("Número ", i, ": ")
-      Leia(numeros[i])
+      numeros[i] := RandI(200) + 1
    FimPara
-   LimpaTela
 
    Para i de 1 ate 100 faca
       numAtual := numeros[i]
@@ -37,70 +36,86 @@ Inicio
          impares[contImpares] := numAtual
       FimSe
 
+      ehPrimo := Falso
       Se numAtual > 1 entao
-         divisores := 0
-         Para j de 1 ate numAtual faca
-            Se (numAtual mod j = 0) entao
-               divisores := divisores + 1
-            FimSe
-         FimPara
-
-         Se (divisores = 2) entao
-            contPrimos := contPrimos + 1
-            primos[contPrimos] := numAtual
+         Se numAtual = 2 entao
+            ehPrimo := Verdadeiro
          Senao
-            contCompostos := contCompostos + 1
-            compostos[contCompostos] := numAtual
-         FimSe
+            Se numAtual mod 2 <> 0 entao
+               ehPrimo := Verdadeiro
+               j := 3
+               Enquanto (j * j <= numAtual) E (ehPrimo) faca
+                  Se (numAtual mod j = 0) entao
+                     ehPrimo := Falso
+                  FimSe
+                  j := j + 2
+               FimEnquanto
+            EndIf
+         EndIf
+      EndIf
+
+      Se ehPrimo entao
+          contPrimos := contPrimos + 1
+          primos[contPrimos] := numAtual
+      Senao
+          Se numAtual > 1 entao
+             contCompostos := contCompostos + 1
+             compostos[contCompostos] := numAtual
+          EndIf
       FimSe
    FimPara
 
-   Escreval()
-   Escreval("Resultados da Classificação:")
-   Escreval()
+   Leia(pausa)
 
-   Escreval("A) Números Pares (", contPares, " encontrados):")
-   Se contPares > 0 entao
-      Para i de 1 ate contPares faca
-         Escreva(pares[i], " ")
-      FimPara
-      Escreval()
-   Senao
-      Escreval("Nenhum número par encontrado.")
-   FimSe
-   Escreval()
+   opcaoMenu := -1
 
-   Escreval("B) Números Ímpares (", contImpares, " encontrados):")
-    Se contImpares > 0 entao
-      Para i de 1 ate contImpares faca
-         Escreva(impares[i], " ")
-      FimPara
-      Escreval()
-   Senao
-      Escreval("Nenhum número ímpar encontrado.")
-   FimSe
-   Escreval()
+   Repita
+      LimpaTela
+      Leia(opcaoMenu)
 
-   Escreval("C) Números Primos (", contPrimos, " encontrados):")
-    Se contPrimos > 0 entao
-      Para i de 1 ate contPrimos faca
-         Escreva(primos[i], " ")
-      FimPara
-      Escreval()
-   Senao
-      Escreval("Nenhum número primo encontrado.")
-   FimSe
-   Escreval()
+      Escolha opcaoMenu
+         Caso 1
+            Se contPares > 0 entao
+               Para i de 1 ate contPares faca
+                  Escreva(pares[i], " ")
+               FimPara
+               Escreval()
+            FimSe
 
-   Escreval("D) Números Compostos (", contCompostos, " encontrados):")
-   Se contCompostos > 0 entao
-      Para i de 1 ate contCompostos faca
-         Escreva(compostos[i], " ")
-      FimPara
-      Escreval()
-   Senao
-      Escreval("Nenhum número composto encontrado.")
-   FimSe
-   Escreval()
+         Caso 2
+            Se contImpares > 0 entao
+               Para i de 1 ate contImpares faca
+                  Escreva(impares[i], " ")
+               FimPara
+               Escreval()
+            FimSe
+
+         Caso 3
+            Se contPrimos > 0 entao
+               Para i de 1 ate contPrimos faca
+                  Escreva(primos[i], " ")
+               FimPara
+               Escreval()
+            FimSe
+
+         Caso 4
+            Se contCompostos > 0 entao
+               Para i de 1 ate contCompostos faca
+                  Escreva(compostos[i], " ")
+               FimPara
+               Escreval()
+            FimSe
+
+         Caso 0
+
+         OutroCaso
+
+      FimEscolha
+
+      Se opcaoMenu <> 0 entao
+         Leia(pausa)
+      FimSe
+
+   Ate opcaoMenu = 0
 
 FimAlgoritmo
