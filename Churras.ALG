@@ -115,7 +115,7 @@ Inicio
       Escreval ("Sistema da lista de churrasco")
       Escreval ("Selecione uma opção: ")
       Escreval (" 1 - Ver a lista de itens")
-      Escreval (" 2 - Add ingrediente")
+      Escreval (" 2 - Adicionar item")
       Escreval (" 3 - Alterar um item")
       Escreval (" 4 - Remover um item")
       Escreval (" 0 - Sair")
