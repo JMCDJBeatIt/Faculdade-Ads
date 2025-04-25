@@ -1,15 +1,13 @@
-algoritmo "ReservaCabine"
+algoritmo "CalculoReservaCliente"
 
-Var
+var
    precoPorPessoa: Real
    quantidadeClientes: Inteiro
    valorTotalReserva: Real
    nomeClientePrincipal: Caractere
-   tipoCabine: Caractere
-   numeroPessoasReserva: Inteiro
 
-Inicio
- Escreva("Informe o preço por pessoa da reserva: ")
+inicio
+   Escreva("Informe o preco por pessoa da reserva: ")
    Leia(precoPorPessoa)
 
    Escreva("Informe a quantidade de clientes na reserva: ")
@@ -19,3 +17,12 @@ Inicio
 
    Escreva("Informe o nome do cliente principal responsavel pela reserva: ")
    Leia(nomeClientePrincipal)
+
+   EscrevaL() // Linha em branco
+   EscrevaL("--- Dados Coletados ---")
+   EscrevaL("Valor Total Calculado: R$", valorTotalReserva:8:2)
+   EscrevaL("Cliente Principal Registrado: ", nomeClientePrincipal)
+   EscrevaL("-----------------------")
+
+
+fimalgoritmo
