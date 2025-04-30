@@ -1,140 +1,175 @@
-algoritmo "GerenciadorEstoque"
+Algoritmo "Sistema de Gestao de Estoque"
+//Algoritimo adaptado com base na aula 12 do prof tiago e imagem.
+Tipo ItemEstoque = Registro
+   nome : caracter
+   quantidade : real // Usando real para compatibilidade, pode ser inteiro se quantidade for sempre inteira
+FimRegistro
+Var
+   opcao : inteiro
+   estoque : vetor [1..5] de ItemEstoque // Capacidade para 5 itens no estoque
 
-var
-   estoque : vetor[1..100] de Caractere // Array para armazenar os nomes dos produtos (limite de 100 itens)
-   quantidade : vetor[1..100] de Inteiro // Array para armazenar a quantidade de cada produto
-   totalItens : Inteiro // Contador de itens no estoque
-   opcao : Inteiro // Opção do menu
-   nomeProduto : Caractere // Nome do produto para operações
-   quantidadeProduto : Inteiro // Quantidade do produto para operações
-   encontrado : Logico // Flag para busca
+Funcao pegar_proxima_posicao_Livre() : inteiro
+Var
+   i : inteiro
+Inicio
+   Para i de 1 ate 5 Faça
+      Se (estoque[i].nome = "") Entao
+         Retorne i
+         Interrompa
+      FimSe
+   FimPara
+   Retorne 0 // Retorna 0 se nao encontrar posicao livre
+FimFuncao
 
-inicio
-   // Inicialização
-   totalItens <- 0
-   limpatela
+Procedimento mostrar_lista()
+Var
+   i : inteiro
+Inicio
+   LimpaTela()
+   Escreval ("LISTA DE ESTOQUE")
+   Escreval()
+   Escreval (" i | Nome | Quantidade ")
+   Para i de 1 ate 5 Faça
+      Se (estoque[i].nome <> "") Entao
+         Escreva (i)
+         Escreva (" | ", estoque[i].nome)
+         Escreval (" | ", estoque[i].quantidade)
+      FimSe
+   FimPara
+   Escreval()
+   Escreval("Pressione ENTER para continuar...")
+   LeiaAlgoritmo // Pausa a execucao ate o usuario pressionar ENTER
+FimProcedimento
+//Mostra a lista de estoque
 
-   // Menu principal
-   repita
-      escreval("-----------------------------------")
-      escreval("     GERENCIADOR DE ESTOQUE")
-      escreval("-----------------------------------")
-      escreval("1. Exibir estoque")
-      escreval("2. Adicionar item")
-      escreval("3. Remover item")
-      escreval("4. Buscar item")
-      escreval("5. Sair")
-      escreval("-----------------------------------")
-      escreva("Escolha uma opção: ")
-      leia(opcao)
-      limpatela
+Procedimento add()
+Var
+   posicao_livre : inteiro
+Inicio
+   LimpaTela()
+   posicao_livre <- pegar_proxima_posicao_Livre()
 
-      escolha opcao
-         caso 1
-            // Exibir estoque
-            escreval("--- ESTOQUE ATUAL ---")
-            se totalItens = 0 entao
-               escreval("Estoque vazio.")
-            senao
-               para i de 1 ate totalItens faca
-                  escreval(i, ". ", estoque[i], " - Quantidade: ", quantidade[i])
-               fimpara
-            fimse
-            escreval("---------------------")
+   Se posicao_livre > 0 Entao
+      Escreval ("ADICIONAR PRODUTOS NO ESTOQUE")
+      Escreval("Adicionar à posição: ", posicao_livre)
+      Escreval()
+      Escreval ("Informe o nome do produto: ")
+      Leia(estoque[posicao_livre].nome)
+      Escreval ("Informe a quantidade: ")
+      Leia(estoque[posicao_livre].quantidade)
 
-         caso 2
-            // Adicionar item
-            se totalItens < 100 entao
-               escreva("Digite o nome do produto a adicionar: ")
-               leia(nomeProduto)
-               escreva("Digite a quantidade: ")
-               leia(quantidadeProduto)
+      LimpaTela()
+      Escreval(" OK - Produto adicionado com sucesso!")
+      Escreval()
+   Senao
+      LimpaTela()
+      Escreval(" ERRO - Estoque cheio! Não é possível adicionar mais produtos.")
+      Escreval()
+   FimSe
+   Escreval("Pressione ENTER para continuar...")
+   LeiaAlgoritmo // Pausa a execucao ate o usuario pressionar ENTER
+FimProcedimento
+//Adiciona produtos ao estoque
 
-               // Verifica se o produto já existe para apenas atualizar a quantidade
-               encontrado <- falso
-               para i de 1 ate totalItens faca
-                  se estoque[i] = nomeProduto entao
-                     quantidade[i] <- quantidade[i] + quantidadeProduto
-                     encontrado <- verdadeiro
-                     interrompa // Sai do loop assim que encontrar
-                  fimse
-               fimpara
+Procedimento alterar()
+Var
+   i : inteiro
+Inicio
+   LimpaTela()
+   Escreval ("ALTERAR UM PRODUTO")
+   Escreval()
+   mostrar_lista() // Mostra a lista para o usuario escolher o item
 
-               se nao encontrado entao
-                  totalItens <- totalItens + 1
-                  estoque[totalItens] <- nomeProduto
-                  quantidade[totalItens] <- quantidadeProduto
-                  escreval("Produto '", nomeProduto, "' adicionado ao estoque.")
-               senao
-                   escreval("Quantidade do produto '", nomeProduto, "' atualizada.")
-               fimse
-            senao
-               escreval("Estoque cheio! Não é possível adicionar mais itens.")
-            fimse
+   Escreva ("Informe o número do item a ser alterado: ")
+   Leia(i)
 
-         caso 3
-            // Remover item
-            se totalItens > 0 entao
-               escreva("Digite o nome do produto a remover: ")
-               leia(nomeProduto)
+   // Verifica se a posicao informada eh valida e contem um item
+   Se (i >= 1) e (i <= 5) e (estoque[i].nome <> "") Entao
+      Escreval ("Informe o novo nome do produto: ")
+      Leia(estoque[i].nome)
+      Escreval ("Informe a nova quantidade: ")
+      Leia(estoque[i].quantidade)
 
-               encontrado <- falso
-               para i de 1 ate totalItens faca
-                  se estoque[i] = nomeProduto entao
-                     // Move os itens subsequentes para preencher o espaço
-                     para j de i ate totalItens - 1 faca
-                        estoque[j] <- estoque[j+1]
-                        quantidade[j] <- quantidade[j+1]
-                     fimpara
-                     totalItens <- totalItens - 1
-                     escreval("Produto '", nomeProduto, "' removido do estoque.")
-                     encontrado <- verdadeiro
-                     interrompa // Sai do loop assim que encontrar
-                  fimse
-               fimpara
+      LimpaTela()
+      Escreval (" OK - Produto atualizado com sucesso!")
+      Escreval()
+   Senao
+      LimpaTela()
+      Escreval(" ERRO - Posição inválida ou vazia!")
+      Escreval()
+   FimSe
+   Escreval("Pressione ENTER para continuar...")
+   LeiaAlgoritmo // Pausa a execucao ate o usuario pressionar ENTER
+FimProcedimento
+//Altera produtos no estoque
 
-               se nao encontrado entao
-                  escreval("Produto '", nomeProduto, "' não encontrado no estoque.")
-               fimse
-            senao
-               escreval("Estoque vazio. Nada para remover.")
-            fimse
+Procedimento remover()
+Var
+   i : inteiro
+Inicio
+   LimpaTela()
+   Escreval ("REMOVER UM PRODUTO")
+   Escreval()
+   mostrar_lista() // Mostra a lista para o usuario escolher o item
 
-         caso 4
-            // Buscar item
-            se totalItens > 0 entao
-               escreva("Digite o nome do produto a buscar: ")
-               leia(nomeProduto)
+   Escreva ("Informe o número do item a ser removido: ")
+   Leia(i)
 
-               encontrado <- falso
-               para i de 1 ate totalItens faca
-                  se estoque[i] = nomeProduto entao
-                     escreval("Produto encontrado: ", estoque[i], " - Quantidade: ", quantidade[i])
-                     encontrado <- verdadeiro
-                     interrompa // Sai do loop assim que encontrar
-                  fimse
-               fimpara
+   // Verifica se a posicao informada eh valida e contem um item
+   Se (i >= 1) e (i <= 5) e (estoque[i].nome <> "") Entao
+      estoque[i].nome <- ""
+      estoque[i].quantidade <- 0
 
-               se nao encontrado entao
-                  escreval("Produto '", nomeProduto, "' não encontrado no estoque.")
-               fimse
-            senao
-               escreval("Estoque vazio. Nada para buscar.")
-            fimse
+      LimpaTela()
+      Escreval (" OK - Produto removido com sucesso!")
+      Escreval()
+   Senao
+      LimpaTela()
+      Escreval(" ERRO - Posição inválida ou vazia!")
+      Escreval()
+   FimSe
+   Escreval("Pressione ENTER para continuar...")
+   LeiaAlgoritmo // Pausa a execucao ate o usuario pressionar ENTER
+FimProcedimento
+//Remove produtos do estoque
 
-         caso 5
-            // Sair
-            escreval("Saindo do programa. Até mais!")
+Inicio
+   // Inicializa o estoque (opcional, mas boa pratica)
+   Para i de 1 ate 5 Faca
+      estoque[i].nome <- ""
+      estoque[i].quantidade <- 0
+   FimPara
 
-         outrocaso
-            escreval("Opção inválida. Tente novamente.")
-      fimescolha
+   Repita
+      LimpaTela() // Limpa a tela antes de exibir o menu
+      Escreval ("Sistema de Gestão de Estoque")
+      Escreval ("Selecione uma opção: ")
+      Escreval (" 1 - Ver a lista de estoque")
+      Escreval (" 2 - Adicionar produto")
+      Escreval (" 3 - Alterar um produto")
+      Escreval (" 4 - Remover um produto")
+      Escreval (" 0 - Sair")
+      Escreva  ("Digite a opção: ")
+      Leia (opcao)
 
-      escreval("") // Linha em branco para melhor visualização
-      escreva("Pressione ENTER para continuar...")
-      leia(nomeProduto) // Pausa a execução até o usuário pressionar Enter
-      limpatela
+      Escolha(opcao)
+      Caso 1
+         mostrar_lista()
+      Caso 2
+         add()
+      Caso 3
+         alterar()
+      Caso 4
+         remover()
+      OutroCaso // Para opções diferentes das esperadas
+         LimpaTela()
+         Escreval("Opção inválida!")
+         Escreval()
+         Escreval("Pressione ENTER para continuar...")
+         LeiaAlgoritmo
+      FimEscolha
+   Ate (opcao = 0)
 
-   ate opcao = 5
-
-fimalgoritmo
+   LimpaTela()
+   Escreval("Saindo do sistema. Até Breve!")
+Fimalgoritmo
