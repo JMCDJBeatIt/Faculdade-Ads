@@ -1,6 +1,4 @@
 algoritmo "GerenciadorEstoque"
-// Descrição: Programa simples para gerenciar estoque de uma loja.
-// Autor: Gemini
 
 var
    estoque : vetor[1..100] de Caractere // Array para armazenar os nomes dos produtos (limite de 100 itens)
