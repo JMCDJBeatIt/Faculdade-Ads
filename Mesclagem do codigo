@@ -104,20 +104,20 @@ inicio
    Escreval("1 Menu de Cabines:")
    Leia(opcao)
 
-   Escreval("2 - Cabine Simples (m�x. 1 pessoa)")
-   Escreval("3 - Cabine Dupla (m�x. 2 pessoas)")
-   Escreval("4 - Cabine Luxo (m�x. 3 pessoas)")
-   Escreval("5 - Su�te Familiar (m�x. 4 pessoas)")
-   Escreval("6 - Su�te Premium (m�x. 5 pessoas)")
-   Escreval("7 - Su�te vip (m�x. 7 pessoas)")
+   Escreval("2 - Cabine Simples (max. 1 pessoa)")
+   Escreval("3 - Cabine Dupla (max. 2 pessoas)")
+   Escreval("4 - Cabine Luxo (max. 3 pessoas)")
+   Escreval("5 - Cabine Familiar (max. 4 pessoas)")
+   Escreval("6 - Cabine Premium (max. 5 pessoas)")
+   Escreval("7 - Cabine vip (max. 7 pessoas)")
 
-   Escreval("Pre�o por Pessoa:")
-   Escreval("2 - Cabine simples, Pre�o: R$ 500,00")
-   Escreval("3 - Cabine Dupla, Pre�o: R$ 900,00")
-   Escreval("4 - Cabine Luxo, Pre�o: R$ 1,500.00")
-   Escreval("5 - Su�te Familiar, Pre�o: R$ 2,000.00")
-   Escreval("6 - Su�te Premium, Pre�o: R$ 3,000.00")
-   Escreval("7 - Su�te vip, Pre�o: R$ 5,000.00")
+   Escreval("Preço por Pessoa:")
+   Escreval("2 - Cabine simples, Preço: R$ 500,00")
+   Escreval("3 - Cabine Dupla, Preço: R$ 900,00")
+   Escreval("4 - Cabine Luxo, Preço: R$ 1,500.00")
+   Escreval("5 - Cabine Familiar, Preço: R$ 2,000.00")
+   Escreval("6 - Cabine Premium, Preço: R$ 3,000.00")
+   Escreval("7 - Cabine vip, Preço: R$ 5,000.00")
 
    // Entrada de dados da cabine
    quantidadeClientes <- 6
@@ -126,23 +126,23 @@ inicio
    para i de 1 ate quantidadeClientes faca
       escreval("=== Cabine ", i, " ===")
 
-      escreva("Quantas pessoas est�o na cabine? ")
+      escreva("Quantas pessoas estao na cabine? ")
       leia(quantidadePessoas)
 
-      escreva("Digite o pre�o por pessoa: ")
+      escreva("Digite o preço por pessoa: ")
       leia(precoPorPessoa)
 
       valorTotalCabine <- precoPorPessoa * quantidadePessoas
 
-      escreva("Deseja parcelar o valor no cart�o de cr�dito? (S/N): ")
+      escreva("Deseja parcelar o valor no cartao de credito? (S/N): ")
       leia(resposta)
-       escreva("Digite o n�mero de parcelas no cart�o de cr�dito: ")
+       escreva("Digite o numero de parcelas no cartao de credito: ")
    leia(np)
       resposta <- maiuscula(resposta)
 
       se resposta = "S" entao
          repita
-            escreva("Digite o n�mero de parcelas (1 a 4): ")
+            escreva("Digite o numero de parcelas (1 a 4): ")
             leia(parcelas)
          ate (parcelas >= 1) e (parcelas <= 4)
 
@@ -165,17 +165,17 @@ inicio
 
    //Parte quatro projeto
 
-   escreva("pessoa respons�vel pela cabine 1 simples" , ": " )
+   escreva("pessoa responsavel pela cabine 1 simples" , ": " )
    Leia(pessoa[1].nome)
-   escreva("pessoa respons�vel pela cabine 2 dupla" , ": " )
+   escreva("pessoa responsavel pela cabine 2 dupla" , ": " )
    Leia(pessoa[2].nome)
-   escreva("pessoa respons�vel pela cabine 3 luxo" , ": " )
+   escreva("pessoa responsavel pela cabine 3 luxo" , ": " )
    Leia(pessoa[3].nome)
-   escreva("pessoa respons�vel pela cabine 4 suite familiar" , ": " )
+   escreva("pessoa responsavel pela cabine 4 suite familiar" , ": " )
    Leia(pessoa[4].nome)
-   escreva("pessoa respons�vel pela cabine 5 suite premium" , ": " )
+   escreva("pessoa responsavel pela cabine 5 suite premium" , ": " )
    Leia(pessoa[5].nome)
-   escreva("pessoa respons�vel pela cabine 6 suite vip" , ": " )
+   escreva("pessoa responsavel pela cabine 6 suite vip" , ": " )
    Leia(pessoa[6].nome)
 Fimalgoritmo
 
