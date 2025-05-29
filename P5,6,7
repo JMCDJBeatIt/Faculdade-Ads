@@ -1,0 +1,301 @@
+p5
+
+Algoritmo "Minha Parte J"
+//Exibir um resumo da reserva, com: tipo da cabine, número de pessoas, valor total e nome do cliente.
+//P5 jeff.
+//NAO MEXAM NO MEU CODIGO ATE TODO MUNDO TERMINAR SUA PARTE, ELE ESTA COMPLETAMENTE FUNCIONAL SEUS ANIMAIS.
+var
+   VTR: Real
+   // Valor total da reserva. VTR = ValorTotalReserva
+   NCP, TC: Caractere
+   // NCP = NomeClientePrincipal. Nome do cliente principal
+   // TC = TipoCabine. Tipo de cabine
+   NPR: Inteiro
+   // NPR = NumeroPessoasReserva. Quantidade de pessoas na reserva
+
+inicio
+   // IMPORTANTE!!!!!!!!!!!!!!: Para que esta parte funcione AGORA de forma independente,
+   // ela precisa pedir todos os dados que exibira no resumo.
+   // QUANDO INTEGRAREM ao codigo final do time, as linhas abaixo que leem
+   // 'VTR', 'NCP' e 'NPR'
+   // PROVAVELMENTE DEVERAO SER REMOVIDAS a nao ser que prefiram assim, pois esses dados virao de outras
+   // partes do codigo (como a parte do Cadete e do Eduardo).
+   // A leitura do 'TC' pode permanecer aqui ou ser movida dependendo
+   // de onde essa informacao for colocada no codigo final.
+
+   // !!Inicio da obtencao de dados e resumo da reserva!!
+
+   Escreval("PARA VER O RESUMO, PREENCHA O QUE SE PEDE ABAIXO")
+   Escreval ()
+   Escreval("Informe o tipo da cabine (Ex: Luxo, Simples, Dupla...): ")
+   Leia(TC)
+
+   LimpaTela()
+   Escreval("Informe o numero de pessoas na reserva: ")
+   Leia(NPR)
+
+   LimpaTela()
+   Escreval("Informe o valor total da reserva: ")
+   Leia(VTR)
+
+   LimpaTela()
+   Escreval("Informe o nome do cliente principal: ")
+   Leia(NCP)
+   // !!Fim da obtencao independete de dados e resumo, para a execucao. possivelmente precisa ser alterado no codigo final, ou nao nunca se sabe!!.
+
+   LimpaTela()
+   Escreval ()
+   Escreval ("!!!RESUMO DA RESERVA!!!")
+   Escreval ()
+   Escreval ("Tipo da Cabine: ",TC)
+   Escreval ()
+   Escreval ("Numero de Pessoas: ",NPR)
+   Escreval ()
+   Escreval ("Valor Total da Reserva: R$", VTR:8:2) // Formata para 2 casas decimais
+   Escreval ()
+   Escreval ("Cliente Responsavel: ",NCP)
+   Escreval ()
+   Escreval ("!!!FIM DO RESUMO DA RESERVA!!!")
+
+   // Mostra o resumo.
+
+
+fimalgoritmo
+
+p6
+
+algoritmo "SistemaReservaCruzeiros"
+// Sistema de Reserva de Cruzeiros
+// Inclui todas as funcionalidades obrigatórias
+
+var
+   // Variáveis para dados da cabine
+   tipoCabine: caractere
+   capacidadeCabine, quantidadePessoas: inteiro
+   precoPorPessoa, valorTotal: real
+   
+   // Variável para cliente
+   nomeCliente: caractere
+   
+   // Variáveis para período e trajeto
+   periodoViagem, trajetoViagem: caractere
+   
+   // Variáveis de controle
+   opcao: inteiro
+   continuar: caractere
+
+// Procedimento para exibir os tipos de cabines disponíveis
+procedimento exibirCabines()
+inicio
+   limpatela
+   escreval("===== TIPOS DE CABINES DISPONÍVEIS =====")
+   escreval("1 - Cabine Interna (2 pessoas) - R$ 1000,00 por pessoa")
+   escreval("2 - Cabine Externa (4 pessoas) - R$ 1500,00 por pessoa")
+   escreval("3 - Cabine Suíte (6 pessoas) - R$ 2000,00 por pessoa")
+   escreval("========================================")
+fimprocedimento
+
+// Procedimento para escolher o tipo de cabine
+procedimento escolherCabine()
+var
+   opcaoCabine: inteiro
+inicio
+   repita
+      escreva("Digite o número da cabine desejada: ")
+      leia(opcaoCabine)
+      
+      escolha opcaoCabine
+         caso 1
+            tipoCabine <- "Cabine Interna"
+            capacidadeCabine <- 2
+            precoPorPessoa <- 1000.00
+            escreval("Cabine escolhida: ", tipoCabine)
+            escreval("Capacidade: ", capacidadeCabine, " pessoas")
+            escreval("Preço por pessoa: R$ ", precoPorPessoa:8:2)
+         caso 2
+            tipoCabine <- "Cabine Externa"
+            capacidadeCabine <- 4
+            precoPorPessoa <- 1500.00
+            escreval("Cabine escolhida: ", tipoCabine)
+            escreval("Capacidade: ", capacidadeCabine, " pessoas")
+            escreval("Preço por pessoa: R$ ", precoPorPessoa:8:2)
+         caso 3
+            tipoCabine <- "Cabine Suíte"
+            capacidadeCabine <- 6
+            precoPorPessoa <- 2000.00
+            escreval("Cabine escolhida: ", tipoCabine)
+            escreval("Capacidade: ", capacidadeCabine, " pessoas")
+            escreval("Preço por pessoa: R$ ", precoPorPessoa:8:2)
+         outrocaso
+            escreval("Opção inválida! Por favor, escolha uma opção entre 1 e 3.")
+      fimescolha
+   ate (opcaoCabine >= 1) e (opcaoCabine <= 3)
+fimprocedimento
+
+// Procedimento para informar quantidade de pessoas
+procedimento informarQuantidadePessoas()
+inicio
+   repita
+      escreva("Informe a quantidade de pessoas: ")
+      leia(quantidadePessoas)
+      
+      se quantidadePessoas <= 0 entao
+         escreval("Quantidade inválida! Precisa ser um número positivo.")
+      senao
+         se quantidadePessoas > capacidadeCabine entao
+            escreval("Esta cabine só tem capacidade para ", capacidadeCabine, " pessoas.")
+            escreval("Por favor, escolha uma quantidade válida.")
+         fimse
+      fimse
+   ate (quantidadePessoas > 0) e (quantidadePessoas <= capacidadeCabine)
+   
+   valorTotal <- precoPorPessoa * quantidadePessoas
+   escreval("Valor total da reserva: R$ ", valorTotal:8:2)
+fimprocedimento
+
+// Procedimento para registrar o nome do cliente
+procedimento registrarCliente()
+inicio
+   escreva("Informe o nome do cliente responsável pela reserva: ")
+   leia(nomeCliente)
+fimprocedimento
+
+// Procedimento para escolher o período da viagem
+procedimento escolherPeriodo()
+var
+   opcaoPeriodo: inteiro
+inicio
+   limpatela
+   escreval("===== ESCOLHA DO PERÍODO DA VIAGEM =====")
+   escreval("1 - Baixa Temporada")
+   escreval("2 - Alta Temporada")
+   escreval("3 - Feriado Prolongado")
+   escreval("=======================================")
+   
+   repita
+      escreva("Digite o número da opção desejada: ")
+      leia(opcaoPeriodo)
+      
+      escolha opcaoPeriodo
+         caso 1
+            periodoViagem <- "Baixa Temporada"
+            escreval("Período escolhido: Baixa Temporada")
+         caso 2
+            periodoViagem <- "Alta Temporada"
+            escreval("Período escolhido: Alta Temporada")
+         caso 3
+            periodoViagem <- "Feriado Prolongado"
+            escreval("Período escolhido: Feriado Prolongado")
+         outrocaso
+            escreval("Opção inválida! Por favor, escolha uma opção entre 1 e 3.")
+      fimescolha
+   ate (opcaoPeriodo >= 1) e (opcaoPeriodo <= 3)
+fimprocedimento
+
+// Procedimento para escolher o trajeto da viagem
+procedimento escolherTrajeto()
+var
+   opcaoTrajeto: inteiro
+inicio
+   limpatela
+   escreval("===== ESCOLHA DO TRAJETO DA VIAGEM =====")
+   escreval("1 - Rio de Janeiro - Búzios - Salvador")
+   escreval("2 - Santos - Ilha Bela - Rio")
+   escreval("3 - Fortaleza - Recife - Natal")
+   escreval("=======================================")
+   
+   repita
+      escreva("Digite o número da opção desejada: ")
+      leia(opcaoTrajeto)
+      
+      escolha opcaoTrajeto
+         caso 1
+            trajetoViagem <- "Rio de Janeiro - Búzios - Salvador"
+            escreval("Trajeto escolhido: Rio de Janeiro - Búzios - Salvador")
+         caso 2
+            trajetoViagem <- "Santos - Ilha Bela - Rio"
+            escreval("Trajeto escolhido: Santos - Ilha Bela - Rio")
+         caso 3
+            trajetoViagem <- "Fortaleza - Recife - Natal"
+            escreval("Trajeto escolhido: Fortaleza - Recife - Natal")
+         outrocaso
+            escreval("Opção inválida! Por favor, escolha uma opção entre 1 e 3.")
+      fimescolha
+   ate (opcaoTrajeto >= 1) e (opcaoTrajeto <= 3)
+fimprocedimento
+
+// Procedimento para exibir o resumo da reserva
+procedimento exibirResumo()
+inicio
+   limpatela
+   escreval("===== RESUMO DA RESERVA =====")
+   escreval("Cliente: ", nomeCliente)
+   escreval("Tipo de Cabine: ", tipoCabine)
+   escreval("Quantidade de Pessoas: ", quantidadePessoas)
+   escreval("Período da Viagem: ", periodoViagem)
+   escreval("Trajeto: ", trajetoViagem)
+   escreval("Valor Total: R$ ", valorTotal:8:2)
+   escreval("============================")
+fimprocedimento
+
+// Programa principal
+inicio
+   repita
+      limpatela
+      escreval("===== SISTEMA DE RESERVA DE CRUZEIROS =====")
+      escreval("1 - Fazer uma nova reserva")
+      escreval("0 - Sair")
+      escreval("=========================================")
+      escreva("Escolha uma opção: ")
+      leia(opcao)
+      
+      escolha opcao
+         caso 1
+            // Processo de reserva
+            exibirCabines()
+            escolherCabine()
+            informarQuantidadePessoas()
+            registrarCliente()
+            escolherPeriodo()
+            escolherTrajeto()
+            exibirResumo()
+            
+            escreva("Pressione ENTER para continuar...")
+            leia(continuar)
+            
+         caso 0
+            escreval("Encerrando o sistema...")
+         outrocaso
+            escreval("Opção inválida!")
+            escreva("Pressione ENTER para continuar...")
+            leia(continuar)
+      fimescolha
+   ate opcao = 0
+fimalgoritmo
+
+p7
+
+Algoritmo EscolhaTrajetoNavio
+
+Var
+   opcao: Inteiro
+
+Inicio
+   EscrevaL("Escolha o trajeto do navio:")
+   EscrevaL("1 - Rio de Janeiro - Búzios - Salvador")
+   EscrevaL("2 - Santos - Ilha Bela - Rio")
+   EscrevaL("3 - Fortaleza - Recife - Natal")
+   Leia(opcao)
+
+   Escolha opcao
+      Caso 1
+         EscrevaL("Você escolheu: Rio de Janeiro - Búzios - Salvador")
+      Caso 2
+         EscrevaL("Você escolheu: Santos - Ilha Bela - Rio")
+      Caso 3
+         EscrevaL("Você escolheu: Fortaleza - Recife - Natal")
+      Outro
+         EscrevaL("Opção inválida!")
+   FimEscolha
+
+FimAlgoritmo
