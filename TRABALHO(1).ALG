@@ -1,4 +1,5 @@
 Algoritmo "trabalho"
+
 var
    quantidadecabine: inteiro
    valortotal: real
@@ -7,6 +8,7 @@ var
    pacotes: vetor [1..6] de caractere
    formapagamento: inteiro
    cabine: vetor [1..6] de real
+
 inicio
 
    quantidade cabine <-
@@ -29,27 +31,27 @@ inicio
 
    repita
       escreval("Escolha forma de pagamento")
-      escreval("1) Cartão de credito")
-      escreval("2) Cartão de debito ")
+      escreval("1) CartÃ£o de credito")
+      escreval("2) CartÃ£o de debito ")
       escreval("3) Pix")
       leia(op)
 
       escolha op
       caso 1
-         escreval ("pagamento com cartão de credito")
-         escreval ("Deseja parcelar? Sim/não")
+         escreval ("pagamento com cartÃ£o de credito")
+         escreval ("Deseja parcelar? Sim/nÃ£o")
          leia (formapagamento)
-         se formapagamento = "sim" então
+         se formapagamento = "sim" entÃ£o
             escreval ("Em quantas vezes deseja parcelar?")
             leia (parcelar)
             escreval ("valor total:R$", valortotal)
             escreval ("parcelar",  parcelar,  " vezes de R$", (valortotal/parcelar))
             escreval ("pagamento concluido")
-         senão
+         senÃ£o
             escreval ("Pagamento a vista. valor total:R$", valortotal)
          fimse
       caso 2
-         escreval ("Pagamento cartão de debito")
+         escreval ("Pagamento cartÃ£o de debito")
          escreval ("valor total:R$", valortotal )
          escreval ("pagamento concluido")
       caso 3
@@ -57,35 +59,11 @@ inicio
          escreval ("valor total:R$",  valortotal)
          escreval ("pagamento concluido")
       outrocaso
-         escreval ("Opção invalida, tente novamente")
+         escreval ("OpÃ§Ã£o invalida, tente novamente")
 
       fimescolha
    ate op <= 3
 
 fimescolha
 
-
-
-
 Fimalgoritmo
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
